@@ -23,6 +23,8 @@ set(SOURCE_FILES
     "Base/BitInputStream.h"
     "Base/ByteInputStream.h"
     "Base/ControllerInput.cpp"
+    "Base/CmdLine.cpp"
+    "Base/CmdLine.h"
     "Base/ControllerInput.h"
     "Base/Endian.h"
     "Base/FatalErrors.cpp"
@@ -49,6 +51,8 @@ set(SOURCE_FILES
     "Base/ResourceMgr.h"
     "Base/Tables.cpp"
     "Base/Tables.h"
+    "Base/WadFile.cpp"
+    "Base/WadFile.h"
     "Game/Cheats.cpp"
     "Game/Cheats.h"
     "Game/Config.cpp"
@@ -66,6 +70,8 @@ set(SOURCE_FILES
     "Game/GameDataFS.cpp"
     "Game/GameDataFS.h"
     "Game/Prefs.cpp"
+    "Game/PWAD.cpp"
+    "Game/PWAD.h"
     "Game/Prefs.h"
     "Game/Resources.cpp"
     "Game/Resources.h"
@@ -249,8 +255,8 @@ if (PLATFORM_MAC)
     # Add a custom command to create the Frameworks directory and copy the framework
     add_custom_command(TARGET ${GAME_NAME} POST_BUILD
         COMMAND ${CMAKE_COMMAND} -E make_directory "$<TARGET_BUNDLE_CONTENT_DIR:${GAME_NAME}>/Frameworks"
-        COMMAND ${CMAKE_COMMAND} -E copy_directory
-            "${SDL2_LIBRARY}/../"
+        COMMAND ${CMAKE_COMMAND} -E copy
+            "${SDL2_LIBRARY}"
             "$<TARGET_BUNDLE_CONTENT_DIR:${GAME_NAME}>/Frameworks"
     )
 endif()

@@ -947,6 +947,13 @@ static void handleConfigEntry(const IniUtils::Entry& entry) noexcept {
     if (entry.section == "GameData") {        
         if (entry.key == "CDImagePath") {
             gGameDataCDImagePath = entry.value;
+#if defined(__APPLE__)
+        char* const basePath = SDL_GetPrefPath(nullptr, SAVE_FILE_PRODUCT);
+        if (basePath) {
+            gGameDataCDImagePath = std::string(basePath) + "Doom3DO.img";
+            SDL_free(basePath);
+        }
+#endif
         }
         else if (entry.key == "UseDataDirectory") {
             gbUseGameDataDirectory = entry.getBoolValue(gbUseGameDataDirectory);
